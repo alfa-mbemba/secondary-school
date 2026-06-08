@@ -1,10 +1,10 @@
 <?php
-// Database credentials kutoka FreeSQLDatabase
-$host = 'sql10.freesqldatabase.com';     // Host yako
-$user = 'sql10829785';                  // Badilisha na username yako
-$password = 'nx9DBMhZyG';            // Badilisha na password yako
-$database = 'sql10829785';              // Badilisha na jina la database yako
-$port = 3306;
+// Database credentials - Kwa Railway
+$host = getenv('DB_HOST') ?: 'sql.freesqldatabase.com';
+$user = getenv('DB_USER') ?: 'root';
+$password = getenv('DB_PASS') ?: '';
+$database = getenv('DB_NAME') ?: 'school_management';
+$port = getenv('DB_PORT') ?: 3306;
 
 // Unda connection
 $conn = new mysqli($host, $user, $password, $database, $port);
@@ -22,6 +22,6 @@ if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 
-// Base URL kwa Render
-define('BASE_URL', getenv('RENDER_EXTERNAL_URL') ?: 'http://localhost');
+// Base URL
+define('BASE_URL', getenv('RAILWAY_PUBLIC_DOMAIN') ? 'https://' . getenv('RAILWAY_PUBLIC_DOMAIN') : 'http://localhost');
 ?>
